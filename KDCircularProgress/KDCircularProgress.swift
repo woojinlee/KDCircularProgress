@@ -26,6 +26,8 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
+    public var padding: CGFloat = 0.2
+    
     public var progress: Double {
         get { return angle.mod(between: 0.0, and: 360.0, byIncrementing: 360.0) / 360.0 }
         set { angle = newValue.clamp(lowerBound: 0.0, upperBound: 1.0) * 360.0 }
@@ -152,11 +154,11 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        radius = (frame.size.width / 2.0) * 0.8
+        radius = (frame.size.width / 2.0) * (1 - padding)
     }
     
     private func setInitialValues() {
-        radius = (frame.size.width / 2.0) * 0.8 //We always apply a 20% padding, stopping glows from being clipped
+        radius = (frame.size.width / 2.0) * (1 - padding) //We always apply a 20% padding, stopping glows from being clipped
         backgroundColor = .clear
         set(colors: .white, .cyan)
     }
